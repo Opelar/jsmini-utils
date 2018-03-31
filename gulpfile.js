@@ -3,7 +3,6 @@ const rollup = require("rollup");
 const watch = require("gulp-watch");
 const babel = require("rollup-plugin-babel");
 
-
 gulp.task("build", async function() {
   const bundle = await rollup.rollup({
     input: "./src/index.js",
@@ -17,7 +16,6 @@ gulp.task("build", async function() {
     sourcemap: true
   });
 });
-
 
 gulp.watch("./src/utils/*.js", ["build"]);
 gulp.watch("./src/index.js", ["build"]);
