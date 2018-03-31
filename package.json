@@ -9,9 +9,14 @@
   },
   "author": "opelar <godmingliang@qq.com>",
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
     "gulp": "^3.9.1",
-    "gulp-rollup": "^2.16.2",
-    "gulp-watch": "^5.0.0"
+    "gulp-watch": "^5.0.0",
+    "rollup": "^0.57.1",
+    "rollup-plugin-babel": "^3.0.3"
   }
 }

@@ -1,20 +1,25 @@
 const gulp = require("gulp");
-const rollup = require("gulp-rollup");
-const gulpSourcemaps = require("gulp-sourcemaps");
+const rollup = require("rollup");
 const watch = require("gulp-watch");
+const babel = require("rollup-plugin-babel");
 
-gulp.task("bundle", () => {
-  gulp
-    .src("./src/utils/*.js")
-    .pipe(sourcemaps.init())
-    .pipe(rollup({ input: "./src/index.js" }))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest("./dist"));
+
+gulp.task("build", async function() {
+  const bundle = await rollup.rollup({
+    input: "./src/index.js",
+    plugins: [babel()]
+  });
+
+  await bundle.write({
+    file: "./dist/utils.js",
+    format: "umd",
+    name: "utils",
+    sourcemap: true
+  });
 });
 
-gulp.task("watch", () => {
-  gulp.watch("./src/utils/*.js", ["bundle"]);
-  gulp.watch("./src/index.js", ["bundle"]);
-});
 
-gulp.task("default", ["watch", "bundle"]);
+gulp.watch("./src/utils/*.js", ["build"]);
+gulp.watch("./src/index.js", ["build"]);
+
+gulp.task("default", ["build"]);
