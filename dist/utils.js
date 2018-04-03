@@ -52,9 +52,9 @@
 
   /*
    * get url params
-   * var args = urlArgs(); 
-   * var q = args.q || ""; 
-   * var n = args.n ? parseInt(args.n) : 10;
+   * let args = urlArgs(); 
+   * let q = args.q || ""; 
+   * let n = args.n ? parseInt(args.n) : 10;
    */
   function urlArgs() {
     var args = {};
@@ -154,6 +154,37 @@
     }
   }
 
+  /**
+   * 时间戳转时间输出
+   * @param {Number} timestamp
+   */
+  function formateDate(timestamp) {
+    var date = new Date(timestamp);
+    // 年 月 日
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    // 时 分 秒
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+
+    var myDate = year + "-" + month + "-" + day;
+    var myTime = hours + ":" + minutes + ":" + seconds;
+
+    return myDate + " " + myTime;
+  }
+
+  /**
+   * 返回数据的类型
+   * classof([]) => "Array"
+   */
+  function classof(o) {
+    if (o === null) return "Null";
+    if (o === undefined) return "Undefined";
+    return Object.prototype.toString.call(o).slice(8, -1);
+  }
+
   var utils = {
     urlArgs: urlArgs,
     getUrlParam: getUrlParam,
@@ -162,7 +193,9 @@
     isArray: isArray,
     upsetArray: upsetArray,
     isNumber: isNumber,
-    trimString: trimString
+    trimString: trimString,
+    formateDate: formateDate,
+    classof: classof
   };
 
   return utils;

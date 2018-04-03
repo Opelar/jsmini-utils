@@ -4,6 +4,8 @@ import isArray from "./utils/isArray";
 import upsetArray from "./utils/upsetArray";
 import isNumber from "./utils/isNumber";
 import trimString from "./utils/trimString";
+import formateDate from "./utils/formateDate";
+import classof from "./utils/classof";
 
 const utils = {
   urlArgs,
@@ -13,7 +15,9 @@ const utils = {
   isArray,
   upsetArray,
   isNumber,
-  trimString
+  trimString,
+  formateDate,
+  classof
 };
 
 export default utils;

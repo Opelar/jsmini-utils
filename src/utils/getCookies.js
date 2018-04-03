@@ -1,16 +1,16 @@
 // 返回document的cookie作为 objext name/value
 // 假设cookie值是用encodeURIComponent() 进行编码的。
 function getCookies() {
-  var cookies = {};
-  var all = document.cookie; // Get all cookies in string
+  let cookies = {};
+  let all = document.cookie; // Get all cookies in string
   if (all === "") return cookies;
-  var list = all.split("; ");
+  let list = all.split("; ");
 
-  for (var i = 0; i < list.length; i++) {
-    var cookie = list[i];
-    var p = cookie.indexOf("=");
-    var name = cookie.substring(0, p);
-    var value = cookie.substring(p + 1);
+  for (let i = 0; i < list.length; i++) {
+    let cookie = list[i];
+    let p = cookie.indexOf("=");
+    let name = cookie.substring(0, p);
+    let value = cookie.substring(p + 1);
     value = decodeURIComponent(value);
     cookies[name] = value;
   }
