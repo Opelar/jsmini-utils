@@ -51,7 +51,7 @@ export function getURLParameters(paramName) {
  * var q = args.q || ""; 
  * var n = args.n ? parseInt(args.n) : 10;
  */
-function urlArgs() {
+export function urlArgs() {
   var args = {};
   var query = location.search.substring(1);
   var pairs = query.split("&");

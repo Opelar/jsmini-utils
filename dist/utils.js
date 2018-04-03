@@ -4,6 +4,52 @@
   (global.utils = factory());
 }(this, (function () { 'use strict';
 
+  /**
+   * reg 获取 param
+   * @param {String} name
+   */
+  function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+
+    if (r != null) {
+      return decodeURI(r[2]);
+    }
+
+    return null;
+  }
+
+  /**
+   * split() 获取 paramName
+   * @param {String} paramName
+   */
+  function getURLParameters(paramName) {
+    var sURL = window.document.URL.toString();
+
+    if (sURL.indexOf("?") > 0) {
+      var arrParams = sURL.split("?");
+
+      var arrURLParams = arrParams[1].split("&");
+
+      var arrParamNames = new Array(arrURLParams.length);
+      var arrParamValues = new Array(arrURLParams.length);
+
+      var i = 0;
+      for (i = 0; i < arrURLParams.length; i++) {
+        var sParam = arrURLParams[i].split("=");
+        arrParamNames[i] = sParam[0];
+        if (sParam[1] != "") arrParamValues[i] = unescape(sParam[1]);else arrParamValues[i] = "No Value";
+      }
+
+      for (i = 0; i < arrURLParams.length; i++) {
+        if (arrParamNames[i] == paramName) {
+          return arrParamValues[i];
+        }
+      }
+      return "No Parameters Found";
+    }
+  }
+
   /*
    * get url params
    * var args = urlArgs(); 
@@ -45,9 +91,78 @@
     return cookies;
   }
 
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  };
+
+  /**
+   * 判断是对象还是数组
+   * @param {Array || object} arr
+   */
+
+  function isArray(arrOrObj) {
+    if (!arrOrObj || (typeof arrOrObj === "undefined" ? "undefined" : _typeof(arrOrObj)) !== "object") {
+      throw new Error("arg is not an object");
+    }
+
+    // if (Array.isArray(arrOrObj)) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+
+    return Object.prototype.toString.call(arrOrObj).slice(8, -1) === "Array";
+  }
+
+  /**
+   * 数组随机乱序
+   * @param {Array} arr
+   */
+  function upsetArray(arr) {
+    return arr.sort(function () {
+      return Math.random() - 0.5;
+    });
+  }
+
+  /**
+   * 判断是否是数字 （排除 NaN）
+   * @param {number} value
+   */
+  function isNumber(value) {
+    return typeof value === "number" && !isNaN(value);
+  }
+
+  /**
+   * 去除空格
+   * @param {String} str
+   * @param {Number} type 1-所有空格 2-前后空格 3-前空格 4-后空格
+   */
+  function trimString(str, type) {
+    switch (type) {
+      case 1:
+        return str.replace(/\s+/g, "");
+      case 2:
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+      case 3:
+        return str.replace(/(^\s*)/g, "");
+      case 4:
+        return str.replace(/(\s*$)/g, "");
+      default:
+        return str;
+    }
+  }
+
   var utils = {
     urlArgs: urlArgs,
-    getCookies: getCookies
+    getUrlParam: getUrlParam,
+    getURLParameters: getURLParameters,
+    getCookies: getCookies,
+    isArray: isArray,
+    upsetArray: upsetArray,
+    isNumber: isNumber,
+    trimString: trimString
   };
 
   return utils;
