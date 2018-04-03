@@ -1,4 +1,4 @@
-import urlArgs from "./utils/urlArgs";
+import { urlArgs } from "./utils/urlArgs";
 import getCookies from "./utils/getCookies";
 
 const utils = {
