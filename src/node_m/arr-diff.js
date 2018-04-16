@@ -1,4 +1,4 @@
-function diff(arr) {
+function diff(arr/*, array*/) {
 	let len = arguments.length;
 	let idx = 0;
 	while (++idx < len) {
@@ -40,6 +40,6 @@ function diffArray(one, two) {
 
 // let a = ['a', 'b', 'c', 'd'];
 // let b = ['b', 'c'];
-// console.log(diff(a, b))
+// console.log(diffArray(a, b))
 
-export default diff;
+export default diffArray;
