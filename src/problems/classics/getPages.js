@@ -15,4 +15,11 @@ itemsPerPage 为 0 的时候返回 0。
 你只需要完成 getPages 函数。
 */
 
-const getPages = (total, itemsPerPage) => /* TODO */
+const getPages = (total, itemsPerPage) => {
+	if (itemsPerPage === 0) return 0;
+	return Math.ceil(total / itemsPerPage)
+};
+
+console.log(getPages(8, 10));
+console.log(getPages(8000, 10));
+console.log(getPages(8000, 0));

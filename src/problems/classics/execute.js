@@ -1,6 +1,5 @@
 /*
 
-
 在开发前端框架、模版引擎的时候，经常会需要我们在特定的上下文中，动态分析、执行特定的表达式。
 例如：在 { x: 1, y: 2, z: 3 } 的上下文中执行表达式 x + y 那么就会得到 3，执行 z - x 就会得到 2。
 
@@ -15,4 +14,4 @@ execute('run()', { run: () => 'Good Night' }) // => Good Night
 
 */
 
-const execute = /* TODO */
+const execute = (str, o) => {};

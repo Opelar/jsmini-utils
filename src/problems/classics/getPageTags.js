@@ -11,4 +11,4 @@
 那么 getPageTags() 则返回数组 ['html', 'head' 'body', 'script']（顺序不重要）。
 */
 
-const getPageTags = /* TODO */
+const getPageTags = () => {};

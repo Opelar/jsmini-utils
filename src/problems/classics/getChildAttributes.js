@@ -1,4 +1,5 @@
 /*
+
 完成 getChildAttributes 函数，它接受一个 DOM 元素作为参数和一个属性名作为参数，
 你需要返回这个 DOM 的 直接 子元素的特定属性列表。
 
@@ -11,6 +12,7 @@
 getChildAttributes(el, 'data-name') // => ['Jerry', 'Lucy', 'Tomy']
 getChildAttributes(el, 'class') // => ['item', 'item', null]
 只需要完成 getChildAttributes 的编写。
+
 */
 
-const getChildAttributes = /* TODO */
+const getChildAttributes = (dom, prop) => {};
