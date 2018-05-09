@@ -18,4 +18,6 @@ const type = o => {
   return toStr.call(o).slice(8, -1)
 }
 
-console.log(type({a: 1}))
+// console.log(type({a: 1}))
+
+module.exports = type;
