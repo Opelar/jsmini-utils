@@ -24,8 +24,8 @@ const toCamelCaseVar = variable => {
 let test = toCamelCaseVar("is_good_bad");
 console.log(test);
 
-var s = "fooStyleCss";
-var s1 = s.replace(/([A-Z])/g, "_$1").toLowerCase();
-var s2 = s.replace(/([A-Z])/g, "-$1").toLowerCase();
+let s = "fooStyleCss";
+let s1 = s.replace(/([A-Z])/g, "_$1").toLowerCase();
+let s2 = s.replace(/([A-Z])/g, "-$1").toLowerCase();
 console.log(s1);
 console.log(s2);

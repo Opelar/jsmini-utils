@@ -21,5 +21,24 @@
 */
 
 const safeGet = (data, path) => {
-  /* TODO */
-}
+  return path.split(".").reduce((d, i) => {
+    console.log("d: ", d);
+    console.log("i: ", i);
+    return typeof d == "undefined" ? d : d[i];
+  }, data);
+};
+
+const _safeGet = (data, path) => {
+  path = path.split(".");
+
+  for (let cur of path) {
+    if (data[cur] === undefined) return undefined;
+    data = data[cur];
+  }
+  return data;
+};
+
+var data = { a: { b: { c: { d: { e: { f: 100 } } } } } };
+let res = _safeGet(data, "a.b.c.d.e.f.g"); // => scriptoj
+console.log(res);
+console.log(123);
