@@ -11,16 +11,15 @@ arrWithoutLoop 中不能使用循环控制结构。
 const type = require("./type");
 
 const arrWithoutLoop = (n, arr) => {
-	if (type(n) !== "Number") return;
-	// console.log(arr);
+  if (type(n) !== "Number") return;
+  // console.log(arr);
 
-	if (n >= 0) {
-		arr.unshift(n);
-		return arrWithoutLoop(n - 1, arr);
-	} 
+  if (n >= 0) {
+    arr.unshift(n);
+    return arrWithoutLoop(n - 1, arr);
+  }
 
-	return arr;
-}
+  return arr;
+};
 
 console.log(arrWithoutLoop(50, []));
-

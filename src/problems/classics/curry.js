@@ -31,4 +31,4 @@
 注意，传给 curry 的函数可能会有任意多个参数。
 */
 
-const curry = () => /* TODO */
+const curry = () => {}

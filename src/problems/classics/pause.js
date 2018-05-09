@@ -11,4 +11,4 @@ async function run () {
 
 */
 
-const pause = async (time) => /* TODO */
+const pause = async time => {};

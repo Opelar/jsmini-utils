@@ -17,4 +17,4 @@ window.addEventListener('resize', debounce(() => {
 
 */
 
-const debounce = (fn, duration) => /* TODO */
+const debounce = (fn, duration) => {}

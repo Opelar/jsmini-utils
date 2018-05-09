@@ -38,9 +38,9 @@ const cats = [
 
 */
 
-const $catsList = $("#cats-list")
+const $catsList = $("#cats-list");
 
-const renderFatCats = (cats) => {
+const renderFatCats = cats => {
   if (!Array.isArray(cats)) return;
   $catsList.children().remove();
 
@@ -52,15 +52,14 @@ const renderFatCats = (cats) => {
       </div>
     `;
     $catsList.append($($item));
-  })
-}
-
+  });
+};
 
 const cats = [
-  { name: 'Tom', weight: 300 },
-  { name: 'Lucy', weight: 400 },
-  { name: 'Lily', weight: 700 },
-  { name: 'Jerry', weight: 600 }
-]
+  { name: "Tom", weight: 300 },
+  { name: "Lucy", weight: 400 },
+  { name: "Lily", weight: 700 },
+  { name: "Jerry", weight: 600 }
+];
 
 renderFatCats(cats);

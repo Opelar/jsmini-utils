@@ -15,8 +15,8 @@ const toStr = Object.prototype.toString;
 const type = o => {
   if (o === undefined) return "Undefined";
   if (o === null) return "Null";
-  return toStr.call(o).slice(8, -1)
-}
+  return toStr.call(o).slice(8, -1);
+};
 
 // console.log(type({a: 1}))
 

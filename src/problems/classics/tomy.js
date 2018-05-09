@@ -7,4 +7,4 @@ Tomy 非常敏感，不喜欢别人碰他的东西。一旦有人碰他就会大
 
 */
 
-const tomy = /* TODO */
+const tomy = ""

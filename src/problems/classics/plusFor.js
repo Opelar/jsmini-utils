@@ -19,4 +19,31 @@ counter2() // => 为李梅+3s
 注意你只需要完成 plusFor 函数，不要使用额外的全局变量。
 */
 
-const plusFor = /* TODO */
+const plusFor = name => {
+  let count = 0;
+  return function() {
+    count += 1;
+    return "give " + name + " +" + count + "s";
+  };
+};
+
+let counter1 = plusFor("xiaoming");
+let counter2 = plusFor("limei");
+
+let a = counter1();
+let a1 = counter1();
+let a2 = counter1();
+
+console.log(a);
+console.log(a1);
+console.log(a2);
+
+let b = counter2();
+let b1 = counter2();
+let b2 = counter2();
+let b3 = counter2();
+
+console.log(b);
+console.log(b1);
+console.log(b2);
+console.log(b3);
