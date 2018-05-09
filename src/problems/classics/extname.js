@@ -3,6 +3,8 @@
 例如，输入 emoji.png，返回 .png。
 */
 
-function extname(filename) {
-	// body...
+function extname(filename = "") {
+	return "." + filename.split(".")[1]
 }
+
+console.log(extname("emoji.png"));
