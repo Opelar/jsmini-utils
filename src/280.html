@@ -1,0 +1,94 @@
+<html>
+
+<head>
+  <title>计算280天后的日期 </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  .form-group {
+    padding: 15px 0;
+  }
+  .start {
+    padding: 10px 0;
+    text-align: center;
+    color: #666666;
+  }
+  input#start {
+    width: 90%;
+    height: 40px;
+    display: block;
+    outline: none;
+    border: none;
+    margin: 0 auto;
+    border: 1px solid #cdcdcd;
+    border-radius: 2px;
+  }
+  #btn {
+    margin: 10px auto;
+    font-size: 16px;
+    width: 90%;
+    height: 40px;
+    background-color: #ff6666;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 40px;
+    color: #ffffff;
+  }
+  .rest {
+    text-align: center;
+    padding: 10px 0;
+    color: #666666;
+  }
+  #end {
+    text-align: center;
+    color: #ff6666;
+  }
+</style>
+
+<body>
+  <form>
+    <div class="form-group">
+      <h1 class="start">start date</h1>
+      <input id="start" type="date" />
+    </div>
+  </form>
+
+  <div id="btn">开始计算</div>
+
+  <div>
+    <h1 class="rest">280天后:
+      <h2 id="end"></h2>
+    </h1>
+  </div>
+</body>
+
+<script>
+  var $ = function (selector) {
+    return document.getElementById(selector);
+  };
+
+  var add = function (d) {
+    d.setDate(d.getDate() + 280);
+    return d.toLocaleDateString();
+  }
+
+  $("btn").addEventListener(
+    "click",
+    function () {
+      $("end").innerHTML = "";
+      var startTime = $("start").value;
+      var utc = new Date(startTime);
+
+      $("end").innerHTML = add(utc);
+    },
+    false
+  );
+
+</script>
+
+</html>
