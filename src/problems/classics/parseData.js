@@ -23,4 +23,33 @@ rows 是数据，metaData 是对数据的说明。现写一个函数 parseData�
 
 */
 
-const parseData = (data) => /* TODO */
+const parseData = data => {
+  let { rows, metaData } = data;
+  let result = [];
+
+  rows.map((item, index) => {
+    let o = {};
+    item.map((i, idx) => {
+      let key = metaData[idx].name;
+      o[key] = i;
+    });
+    result.push(o);
+  });
+
+  return result;
+};
+
+let data = {
+  rows: [
+    ["Lisa", 16, "Female", "2000-12-01"],
+    ["Bob", 22, "Male", "1996-01-21"]
+  ],
+  metaData: [
+    { name: "name", note: "" },
+    { name: "age", note: "" },
+    { name: "gender", note: "" },
+    { name: "birthday", note: "" }
+  ]
+};
+
+console.log(parseData(data));

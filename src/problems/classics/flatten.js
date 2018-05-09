@@ -4,20 +4,20 @@
 */
 
 const flatten = (arr, res) => {
-	if (!Array.isArray(arr)) return;
+  if (!Array.isArray(arr)) return;
 
-	let cur;
-	let len = arr.length;
-	let idx = -1;
+  let cur;
+  let len = arr.length;
+  let idx = -1;
 
-	while (++idx < len) {
-		cur = arr[idx];
-		Array.isArray(cur) ? flatten(cur, res) : res.push(cur);
-	}
+  while (++idx < len) {
+    cur = arr[idx];
+    Array.isArray(cur) ? flatten(cur, res) : res.push(cur);
+  }
 
-	return res;
-}
+  return res;
+};
 
 let arr = ["g", 2, 3, [34, 56, ["a", "b"]]];
 
-console.log(flatten(arr, []))
+console.log(flatten(arr, []));
