@@ -13,4 +13,14 @@
 
 */
 
-const isAnagram = (str1, str2) => /* TODO */
+const isAnagram = (str1, str2) => sortStr(str1) === sortStr(str2);
+
+const sortStr = str =>
+  str
+    .split("")
+    .sort()
+    .join("");
+
+let b = isAnagram("anagram", "nagaram"); // => return true.
+console.log(b);
+// isAnagram("rat", "car") // => return false.
