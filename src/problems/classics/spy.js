@@ -34,5 +34,4 @@ user.getName.calls[0].result // => 'Jerry'
 
 */
 
-
-const spy = (fn) => /* TODO */
+const spy = fn => {};

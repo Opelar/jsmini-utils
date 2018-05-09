@@ -8,4 +8,24 @@
 变量名首尾的下划线不需要做处理，中间的下划线全部删除并且处理成驼峰。
 */
 
-const toCamelCaseVar = (variable) => /* TODO */
+const toCamelCaseVar = variable => {
+  let arr = variable.split("_");
+  let o = arr[0];
+  let len = arr.length;
+  let idx = 0;
+
+  while (++idx < len) {
+    o = o + arr[idx].slice(0, 1).toUpperCase() + arr[idx].slice(1);
+  }
+
+  return o;
+};
+
+let test = toCamelCaseVar("is_good_bad");
+console.log(test);
+
+var s = "fooStyleCss";
+var s1 = s.replace(/([A-Z])/g, "_$1").toLowerCase();
+var s2 = s.replace(/([A-Z])/g, "-$1").toLowerCase();
+console.log(s1);
+console.log(s2);
