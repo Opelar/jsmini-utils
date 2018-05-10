@@ -17,4 +17,19 @@ window.addEventListener('resize', debounce(() => {
 
 */
 
-const debounce = (fn, duration) => {}
+const debounce = (fn, duration) => {
+  let timer = null;
+  return () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn();
+    }, duration);
+  };
+};
+
+window.addEventListener(
+  "resize",
+  debounce(() => {
+    console.log("Hello");
+  }, 50)
+);
