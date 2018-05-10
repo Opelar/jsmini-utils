@@ -33,5 +33,51 @@ driveCustomers(MissLi, MarWang, ...)
 */
 
 /* drive 函数已经可以直接使用 */
+const type = require("./type");
 
-const driveCustomers = () => /* TODO */
+const driveCustomers = (...fns) => {
+  let arr = [];
+  let len = fns.length;
+  let idx = -1;
+
+  while (++idx < len) {
+    let fn = fns[idx];
+    // console.log(fn);
+    if (type(fn) !== "Function") {
+      continue;
+    }
+    fn(name => {
+      console.log(name);
+      arr.push(name);
+      if (len === arr.length) {
+        drive(arr);
+      }
+    });
+  }
+};
+
+const drive = arr => {
+  console.log(arr);
+  console.log("start drive...");
+};
+
+// test log
+const MissLi = cb => {
+  setTimeout(() => {
+    cb("MissLi");
+  }, 10); // 上车时间不一定
+};
+
+const MrWang = cb => {
+  setTimeout(() => {
+    cb("MrWang");
+  }, 300); // 上车时间不一定
+};
+
+const MissDong = cb => {
+  setTimeout(() => {
+    cb("2333.....")
+  }, 2000);
+}
+
+driveCustomers(MissLi, MrWang, MissDong);
