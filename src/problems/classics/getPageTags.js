@@ -19,7 +19,6 @@ const getPageTags = (nodes, result = []) => {
     localName && result.push(localName);
     childNodes && getPageTags(childNodes, result);
   }
-
 	// 去重 TODO...
   return result;
 };

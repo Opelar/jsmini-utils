@@ -6,4 +6,4 @@ hexToRGB('#9fc') // => rgb(153, 255, 204)
 hexToRGB('无效颜色') // => null
 */
 
-const hexToRGB = (hex) => /* TODO */
+const hexToRGB = hex => {};
