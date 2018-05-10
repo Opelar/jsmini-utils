@@ -11,4 +11,18 @@
 那么 getPageTags() 则返回数组 ['html', 'head' 'body', 'script']（顺序不重要）。
 */
 
-const getPageTags = () => {};
+const getPageTags = (nodes, result = []) => {
+  for (const item of nodes) {
+    let childNodes = item.childNodes;
+    let localName = item.localName;
+
+    localName && result.push(localName);
+    childNodes && getPageTags(childNodes, result);
+  }
+
+	// 去重 TODO...
+  return result;
+};
+
+let res = getPageTags(document.childNodes, []); 
+console.log(res);

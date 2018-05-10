@@ -21,6 +21,9 @@ const sortStr = str =>
     .sort()
     .join("");
 
-let b = isAnagram("anagram", "nagaram"); // => return true.
-console.log(b);
-// isAnagram("rat", "car") // => return false.
+let b = isAnagram("anagram", "nagaram");
+let b1 = isAnagram("rat", "car");
+let b2 = isAnagram("abc", "abc");
+console.log(b); // true
+console.log(b1); // false
+console.log(b2); // true
