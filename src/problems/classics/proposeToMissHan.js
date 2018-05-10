@@ -8,7 +8,22 @@
 
 你只需要完成 proposeToMissHan 函数的编写。
 */
+// console.log(Promise);
+const proposeToMissHan = isOK => {
+  let duration = 2000;
+  let timer = null;
+  return new Promise((resolve, reject) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      isOK ? resolve("ok") : reject("no");
+    }, duration);
+  });
+};
 
-const proposeToMissHan = (isOK) => {
-  /* TODO */
-}
+proposeToMissHan(false)
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log(err);
+  });
