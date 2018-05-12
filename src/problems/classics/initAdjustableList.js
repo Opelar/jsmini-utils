@@ -31,4 +31,4 @@
 
 */
 
-const initAdjustableList = /* TODO */
+const initAdjustableList = () => {};

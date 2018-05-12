@@ -25,21 +25,25 @@ parseQueryString('https://scriptoj.com/problems?offset=100&limit=10')
 
 const parseQueryString = str => {
   let arr = str.split("?")[1].split("&"); // [ 'offset=100', 'limit=10' ]
-  let o = {};
-  let cur;
-  let len = arr.length;
-  let idx = -1;
+  let cur,
+    key,
+    val,
+    o = {},
+    len = arr.length,
+    idx = -1;
 
   while (++idx < len) {
     cur = arr[idx];
-    let key = cur.split("=")[0];
-    let val = cur.split("=")[1];
+    key = cur.split("=")[0];
+    val = cur.split("=")[1];
     o[key] = val ? val : null;
   }
 
   return o;
 };
 
-let res = parseQueryString("https://scriptoj.com/problems?offset=100&limit=10&name=a#nice");
+let res = parseQueryString(
+  "https://scriptoj.com/problems?offset=100&limit=10&name=a#nice"
+);
 // hash TODO...
 console.log(res);

@@ -4,18 +4,43 @@
 
 function main () {
   where() // => 'main'
-}
-
-function a () {
+  }
+  
+  function a () {
   function b () {
     where() // => 'b'
   }
   b()
-}
-
-main()
-a()
+  }
+  
+  main()
+  a()
 where 需要在严格模式下编写。
 
 */
-const where = () => /* TODO */
+
+// function where() {
+//   console.log(where.caller.name)
+// };
+
+const where = () => {
+  let reg = /\s+at\s(\S+)\s\(/g;
+  let str = new Error().stack.toString();
+  let res = reg.exec(str) && reg.exec(str);
+  console.log(res[1]);
+  return res && res[1];
+};
+
+function main() {
+  where(); // => 'main'
+}
+
+function a() {
+  function b() {
+    where(); // => 'b'
+  }
+  b();
+}
+
+main();
+a();

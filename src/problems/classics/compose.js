@@ -24,6 +24,9 @@
 额外挑战：你能通过 1~2 行代码实现 compose 吗。
 */
 
-const compose = () => {
-  /* TODO */
+const compose = (...fns) => {
+	/* TODO */
+	console.log(fns);
 }
+
+compose(1,2,3);
