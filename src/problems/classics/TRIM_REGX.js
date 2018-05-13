@@ -7,4 +7,4 @@
 注意：你只需要完成正则表达式的编写。
 */
 
-const TRIM_REGX = /* TODO */
+const TRIM_REGX = "";

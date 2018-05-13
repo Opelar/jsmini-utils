@@ -15,4 +15,21 @@ getChildAttributes(el, 'class') // => ['item', 'item', null]
 
 */
 
-const getChildAttributes = (dom, prop) => {};
+const getChildAttributes = (dom, prop) => {
+  if (!dom || !prop) return;
+
+  let childNodes = dom.childNodes;
+  let arr = [];
+  for (const childNode of childNodes) {
+    if (childNode.nodeName === "#text") continue;
+    /* childNode.getAttribute(prop) &&  */
+    arr.push(childNode.getAttribute(prop))
+  }
+  console.log(arr);
+  return arr;
+};
+
+const $ = selector => document.getElementById(selector);
+
+getChildAttributes($("list"), "data-name"); // => ['Jerry', 'Lucy', 'Tomy']
+getChildAttributes($("list"), "class"); // => ['item', 'item', null]
