@@ -1,6 +1,5 @@
 /*
 
-
 页面上有这么一个列表：
 
 <ul id='adjustable-list'>
@@ -31,4 +30,28 @@
 
 */
 
-const initAdjustableList = () => {};
+const $ = selector => document.querySelectorAll(selector);
+
+const initAdjustableList = () => {
+  let $list = $("#adjustable-list");
+  let $up = $(".up");
+  let $down = $(".down");
+
+  console.log($list[0].childNodes);
+
+  for (const item of $up) {
+    item.addEventListener("click", e => {
+      let li = e.target.parentNode;
+      console.log(li);
+    });
+  }
+
+  for (const item of $down) {
+    item.addEventListener("click", e => {
+      let li = e.target.parentNode;
+      console.log(li);
+    });
+  }
+};
+
+initAdjustableList();

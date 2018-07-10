@@ -25,8 +25,13 @@
 */
 
 const compose = (...fns) => {
-	/* TODO */
-	console.log(fns);
-}
+  return x => fns.reduceRight((v, f) => f(v), x);
+};
 
-compose(1,2,3);
+const compose1 = (...fns) => (...args) =>
+  fns.reduceRight((args, fn) => fn(...[].concat(args)), [].concat(args));
+
+const compose2 = (...fns) => args =>
+  fns.reduceRight((args, fn) => fn(args), args);
+
+compose(1, 2, 3);
