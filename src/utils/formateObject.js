@@ -176,6 +176,7 @@ let wantArray = [
 	}
 ];
 
+// to array
 function _formate(obj) {
 	let arr = [];
 	Object.keys(obj).forEach(key0 => {
@@ -190,7 +191,7 @@ function _formate(obj) {
 }
 
 // console.log(_formate(data));
-
+// back obj
 let so = {
 	vendor: "admob",
 	adType: "banner",
@@ -201,17 +202,19 @@ let so = {
 	status: "c"
 };
 
-let _so = { ...so };
+function backObj(so) {
+	let _so = { ...so };
 
-delete _so.vendor;
-delete _so.adType;
+	delete _so.vendor;
+	delete _so.adType;
 
-let sb = {
-	[so.vendor]: {
-		[so.adType]: {
-			..._so
+	return {
+		[so.vendor]: {
+			[so.adType]: {
+				..._so
+			}
 		}
-	}
-};
+	};
+}
 
-console.log(sb);
+console.log(backObj(so));
