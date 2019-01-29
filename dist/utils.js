@@ -283,6 +283,129 @@
     };
   }();
 
+  function encode(value, opts) {
+    if (opts.encode) {
+      return encodeURIComponent(value);
+    }
+    return value;
+  }
+
+  function makeQueryString(obj, opts) {
+    var defaults = {
+      encode: true,
+      strict: true
+    };
+
+    opts = Object.assign(defaults, opts);
+
+    return obj ? Object.keys(obj).sort().map(function (key) {
+      var val = obj[key];
+
+      if (val === undefined) {
+        return '';
+      }
+
+      if (val === null) {
+        return encode(key, opts);
+      }
+
+      if (Array.isArray(val)) {
+        var result = [];
+
+        val.slice().forEach(function (val2) {
+          if (val2 === undefined) {
+            return;
+          }
+
+          if (val2 === null) {
+            result.push(encode(key, opts));
+          } else {
+            result.push(encode(key, opts) + '=' + encode(val2, opts));
+          }
+        });
+
+        return result.join('&');
+      }
+
+      return encode(key, opts) + '=' + encode(val, opts);
+    }).filter(function (x) {
+      return x.length > 0;
+    }).join('&') : '';
+  }
+
+  function isPromise(obj) {
+    return !!obj && ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+  }
+
+  function isPlainObject(obj) {
+    if (typeOf(obj) !== 'Object') {
+      return false;
+    }
+
+    var ctor = obj.constructor;
+
+    if (typeof ctor !== 'function') {
+      return false;
+    }
+
+    var prot = ctor.prototype;
+
+    if (typeOf(prot) !== 'Object') {
+      return false;
+    }
+
+    return prot.hasOwnProperty('isPrototypeOf');
+  }
+
+  function tryGetValue(fn, defaultValue) {
+    try {
+      return fn();
+    } catch (e) {
+      return defaultValue;
+    }
+  }
+
+  function shallowEqual(objA, objB, compare) {
+    if (objA === objB) {
+      return true;
+    }
+
+    // 其中一个不是object，则不相等
+    if (!objA || !objB || (typeof objA === 'undefined' ? 'undefined' : _typeof(objA)) + (typeof objB === 'undefined' ? 'undefined' : _typeof(objB)) !== 'objectobject') {
+      return false;
+    }
+
+    var keyA = Object.keys(objA);
+    var keyB = Object.keys(objB);
+    var len = keyA.length;
+
+    // key 数量不一致则不相等
+    if (len !== keyB.length) {
+      return false;
+    }
+
+    var hasCallback = typeof compare === 'function';
+
+    for (var i = 0; i < len; i++) {
+      var key = keyA[i];
+
+      if (!Object.prototype.hasOwnProperty.call(objB, key)) {
+        return false;
+      }
+
+      var valA = objA[key];
+      var valB = objB[key];
+
+      var ret = hasCallback ? compare(valA, valB, key) : void 0;
+
+      if (ret === false || ret === void 0 && valA !== valB) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   var utils = {
     urlArgs: urlArgs,
     getUrlParam: getUrlParam,
@@ -292,9 +415,14 @@
     upsetArray: upsetArray,
     isNumber: isNumber,
     trimString: trimString,
-    formateDate: formatDate,
+    formatDate: formatDate,
     classof: classof,
-    httpClient: httpClient
+    httpClient: httpClient,
+    makeQueryString: makeQueryString,
+    isPromise: isPromise,
+    isPlainObject: isPlainObject,
+    tryGetValue: tryGetValue,
+    shallowEqual: shallowEqual
   };
 
   return utils;
