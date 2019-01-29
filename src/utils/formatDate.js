@@ -2,7 +2,7 @@
  * 时间戳转时间输出
  * @param {Number} timestamp
  */
-export default function formateDate(timestamp) {
+export default function formatDate(timestamp) {
   let date = new Date(timestamp);
   // 年 月 日
   let year = date.getFullYear();
