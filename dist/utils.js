@@ -97,22 +97,39 @@
     return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   };
 
-  /**
-   * 判断是对象还是数组
-   * @param {Array || object} arr
-   */
+  var asyncToGenerator = function (fn) {
+    return function () {
+      var gen = fn.apply(this, arguments);
+      return new Promise(function (resolve, reject) {
+        function step(key, arg) {
+          try {
+            var info = gen[key](arg);
+            var value = info.value;
+          } catch (error) {
+            reject(error);
+            return;
+          }
+
+          if (info.done) {
+            resolve(value);
+          } else {
+            return Promise.resolve(value).then(function (value) {
+              step("next", value);
+            }, function (err) {
+              step("throw", err);
+            });
+          }
+        }
+
+        return step("next");
+      });
+    };
+  };
 
   function isArray(arrOrObj) {
     if (!arrOrObj || (typeof arrOrObj === "undefined" ? "undefined" : _typeof(arrOrObj)) !== "object") {
       throw new Error("arg is not an object");
     }
-
-    // if (Array.isArray(arrOrObj)) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-
     return Object.prototype.toString.call(arrOrObj).slice(8, -1) === "Array";
   }
 
@@ -126,10 +143,6 @@
     });
   }
 
-  /**
-   * 判断是否是数字 （排除 NaN）
-   * @param {number} value
-   */
   function isNumber(value) {
     return typeof value === "number" && !isNaN(value);
   }
@@ -158,7 +171,7 @@
    * 时间戳转时间输出
    * @param {Number} timestamp
    */
-  function formateDate(timestamp) {
+  function formatDate(timestamp) {
     var date = new Date(timestamp);
     // 年 月 日
     var year = date.getFullYear();
@@ -185,6 +198,91 @@
     return Object.prototype.toString.call(o).slice(8, -1);
   }
 
+  var _this = undefined;
+
+  var httpClient = {};
+
+  httpClient.defaults = {
+    headers: {}
+  };
+
+  httpClient.request = function () {
+    var _ref = asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref2) {
+      var _ref2$headers = _ref2.headers,
+          headers = _ref2$headers === undefined ? {} : _ref2$headers,
+          _ref2$path = _ref2.path,
+          path = _ref2$path === undefined ? '/' : _ref2$path,
+          _ref2$method = _ref2.method,
+          method = _ref2$method === undefined ? 'GET' : _ref2$method,
+          _ref2$queryStringObje = _ref2.queryStringObject,
+          queryStringObject = _ref2$queryStringObje === undefined ? {} : _ref2$queryStringObje,
+          _ref2$payload = _ref2.payload,
+          payload = _ref2$payload === undefined ? {} : _ref2$payload;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              return _context.abrupt('return', new Promise(function (resolve, reject) {
+                var requestUrl = path + '?';
+                var counter = 0;
+
+                for (var queryKey in queryStringObject) {
+                  if (queryStringObject.hasOwnProperty(queryKey)) {
+                    counter += 1;
+
+                    if (counter > 1) {
+                      requestUrl += '&';
+                    }
+
+                    requestUrl += queryKey + '=' + queryStringObject[queryKey];
+                  }
+                }
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open(method, requestUrl, true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+
+                headers = Object.assign(httpClient.defaults.headers, headers);
+
+                for (var headerKey in headers) {
+                  if (headers.hasOwnProperty(headerKey)) {
+                    xhr.setRequestHeader(headerKey, headers[headerKey]);
+                  }
+                }
+
+                xhr.onreadystatechange = function () {
+                  if (xhr.readyState === XMLHttpRequest.DONE) {
+                    var statusCode = xhr.status;
+                    var responseReturned = xhr.responseText;
+
+                    try {
+                      var parsedResponse = JSON.parse(responseReturned);
+                      resolve({ statusCode: statusCode, responsePayload: parsedResponse });
+                    } catch (error) {
+                      reject(error);
+                    }
+                  }
+                };
+
+                var payloadString = JSON.stringify(payload);
+
+                xhr.send(payloadString);
+              }));
+
+            case 1:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
   var utils = {
     urlArgs: urlArgs,
     getUrlParam: getUrlParam,
@@ -194,8 +292,9 @@
     upsetArray: upsetArray,
     isNumber: isNumber,
     trimString: trimString,
-    formateDate: formateDate,
-    classof: classof
+    formateDate: formatDate,
+    classof: classof,
+    httpClient: httpClient
   };
 
   return utils;
