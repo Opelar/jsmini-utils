@@ -40,7 +40,7 @@ function contrast(ks, vals) {
   let maxVal = 0;
   let idx = 0;
 
-  vals.map((item, index) => {
+  vals.forEach((item, index) => {
     if (item >= maxVal) {
       maxVal = item;
       idx = index;
