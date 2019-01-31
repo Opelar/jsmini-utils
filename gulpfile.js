@@ -17,7 +17,7 @@ gulp.task("build", async function() {
   });
 });
 
-gulp.watch("./src/utils/*.js", ["build"]);
-gulp.watch("./src/index.js", ["build"]);
+watch("./src/utils/*.js", ["build"]);
+watch("./src/index.js", ["build"]);
 
 gulp.task("default", ["build"]);
