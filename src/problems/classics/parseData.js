@@ -27,9 +27,9 @@ const parseData = data => {
   let { rows, metaData } = data;
   let result = [];
 
-  rows.map((item, index) => {
+  rows.forEach((item) => {
     let o = {};
-    item.map((i, idx) => {
+    item.forEach((i, idx) => {
       let key = metaData[idx].name;
       o[key] = i;
     });

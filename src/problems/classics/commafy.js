@@ -9,16 +9,17 @@
 const conmafy = num => {
   let arr = num.toString().split("");
   let pos = arr.indexOf(".");
-  pos = pos === -1 ? arr.length - 1 : pos;
   let count = 0;
-  // console.log("arr: ", arr);
-  // console.log("pos: ", pos);
+
+  pos = pos === -1 ? arr.length - 1 : pos;
+
   while (--pos > 0) {
     count += 1;
     if (count % 3 === 0) {
       arr.splice(pos, 0, ",");
     }
   }
+
   return arr.join("");
 };
 

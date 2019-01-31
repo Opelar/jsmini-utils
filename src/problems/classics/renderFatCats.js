@@ -44,7 +44,7 @@ const renderFatCats = cats => {
   if (!Array.isArray(cats)) return;
   $catsList.children().remove();
 
-  cats.sort((a, b) => b.weight - a.weight).map((item, index) => {
+  cats.sort((a, b) => b.weight - a.weight).forEach((item, index) => {
     const $item = `
       <div class='cat'>
         <span class='cat-name'>${item.name}</span>
